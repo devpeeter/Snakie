@@ -1,0 +1,14 @@
+{
+  "name": "snake-attack-game",
+  "version": "1.0.0",
+  "description": "HTML5 Snake Attack Game",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview --host"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0"
+  }
+}
