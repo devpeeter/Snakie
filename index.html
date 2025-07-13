@@ -69,6 +69,44 @@
         <script type="text/javascript" src="js/CAnimMenu.js"></script>
         <script type="text/javascript" src="js/CLogo.js"></script>
         <script type="text/javascript" src="js/CAnimHelp.js"></script>
+        
+        <!-- Modern ES6 modules -->
+        <script type="module">
+            import { GameManager } from './src/game/GameManager.js';
+            import { GameConfig } from './src/config/GameConfig.js';
+            
+            // Initialize modern game manager alongside legacy code
+            window.modernGameManager = null;
+            
+            // Function to initialize modern systems
+            window.initModernSystems = async function() {
+                try {
+                    const config = new GameConfig({
+                        gameplay: {
+                            heroRotationSpeed: 10,
+                            heroSpeedUp: 15,
+                            heroSpeed: 10
+                        },
+                        audio: {
+                            enabled: true,
+                            volume: 1.0
+                        }
+                    });
+                    
+                    window.modernGameManager = new GameManager(config);
+                    await window.modernGameManager.initialize();
+                    
+                    console.log('Modern game systems initialized');
+                } catch (error) {
+                    console.error('Failed to initialize modern systems:', error);
+                }
+            };
+            
+            // Initialize when DOM is ready
+            document.addEventListener('DOMContentLoaded', () => {
+                window.initModernSystems();
+            });
+        </script>
 
     </head>
     <body ondragstart="return false;" ondrop="return false;" >
@@ -98,6 +136,26 @@
                     fullscreen:true, //SET THIS TO FALSE IF YOU DON'T WANT TO SHOW FULLSCREEN BUTTON
                     check_orientation:true //SET TO FALSE IF YOU DON'T WANT TO SHOW ORIENTATION ALERT ON MOBILE DEVICES
                 });
+                
+                // Connect legacy and modern systems
+                if (window.modernGameManager) {
+                    // Example: Use modern input manager for legacy game
+                    window.modernGameManager.inputManager.on('left', (action, type) => {
+                        if (s_oGame && type === 'down') {
+                            s_oGame.onLeft();
+                        } else if (s_oGame && type === 'up') {
+                            s_oGame.onKeyReleased();
+                        }
+                    });
+                    
+                    window.modernGameManager.inputManager.on('right', (action, type) => {
+                        if (s_oGame && type === 'down') {
+                            s_oGame.onRight();
+                        } else if (s_oGame && type === 'up') {
+                            s_oGame.onKeyReleased();
+                        }
+                    });
+                }
 
                 $(oMain).on("start_session", function (evt) {
                     if (getParamValue('ctl-arcade') === "true") {
