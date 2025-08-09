@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gray-900 text-white font-game;
+  }
+  
+  * {
+    @apply box-border;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-game-primary hover:bg-orange-600 text-white font-bold py-2 px-4 rounded transition-colors duration-200;
+  }
+  
+  .btn-secondary {
+    @apply bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded transition-colors duration-200;
+  }
+  
+  .input-field {
+    @apply bg-gray-800 border border-gray-600 rounded px-3 py-2 text-white placeholder-gray-400 focus:outline-none focus:border-game-primary;
+  }
+  
+  .card {
+    @apply bg-gray-800 rounded-lg shadow-lg p-6 border border-gray-700;
+  }
+  
+  .game-canvas {
+    @apply border-2 border-game-primary rounded-lg bg-black;
+  }
+}
+
+/* Game-specific styles */
+.snake-segment {
+  @apply rounded-sm;
+}
+
+.food-item {
+  @apply rounded-full;
+}
+
+/* Loading animation */
+.loading-spinner {
+  @apply animate-spin rounded-full h-8 w-8 border-b-2 border-game-primary;
+}
+
+/* Responsive game container */
+.game-container {
+  @apply flex flex-col items-center justify-center min-h-screen p-4;
+}
+
+@media (max-width: 768px) {
+  .game-container {
+    @apply p-2;
+  }
+}

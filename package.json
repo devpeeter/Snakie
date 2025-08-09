@@ -1,14 +1,46 @@
 {
-  "name": "snake-attack-game",
+  "name": "snake-attack-fullstack",
   "version": "1.0.0",
-  "description": "HTML5 Snake Attack Game",
-  "main": "index.html",
+  "description": "Fullstack Snake Attack Game with React and Node.js",
+  "type": "module",
   "scripts": {
-    "dev": "vite --host",
-    "build": "vite build",
-    "preview": "vite preview --host"
+    "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\"",
+    "client:dev": "vite",
+    "client:build": "vite build",
+    "client:preview": "vite preview",
+    "server:dev": "nodemon server/index.js",
+    "server:start": "node server/index.js",
+    "db:migrate": "node server/scripts/migrate.js",
+    "db:seed": "node server/scripts/seed.js",
+    "build": "npm run client:build",
+    "start": "npm run server:start"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.8.0",
+    "axios": "^1.6.0",
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "helmet": "^7.1.0",
+    "pg": "^8.11.3",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "dotenv": "^16.3.1",
+    "express-rate-limit": "^7.1.5",
+    "express-validator": "^7.0.1",
+    "socket.io": "^4.7.4",
+    "socket.io-client": "^4.7.4"
   },
   "devDependencies": {
-    "vite": "^5.0.0"
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@vitejs/plugin-react": "^4.2.1",
+    "vite": "^5.0.8",
+    "nodemon": "^3.0.2",
+    "concurrently": "^8.2.2",
+    "tailwindcss": "^3.4.0",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.32"
   }
 }
